@@ -20,7 +20,8 @@ public class PlayerMovement : MonoBehaviour
 
         // Add a forward force
         rb.AddForce(0, 0, forwardForce * Time.deltaTime);
-
+        
+        rb.constraints = RigidbodyConstraints.FreezeRotation;
         // Move side to side
         // if (Input.GetKey("d"))
         // {
@@ -47,16 +48,11 @@ public class PlayerMovement : MonoBehaviour
             Debug.Log("player is below 0f");
             if (!isFrozen)
             {
-            rb.constraints = RigidbodyConstraints.FreezePosition | RigidbodyConstraints.FreezeRotation;
+            rb.constraints = RigidbodyConstraints.FreezePosition;
             isFrozen = true;
             playerMovement.enabled = false;
             }
             FindObjectOfType<GameManager>().EndGame();
-        }
-
-        // Return to Main Menu
-        if (Input.GetKey(KeyCode.Escape)) {
-            SceneManager.LoadScene(0);
         }
     }
 }
